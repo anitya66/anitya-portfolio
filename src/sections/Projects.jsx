@@ -34,27 +34,37 @@ function ProjectVisual({ project }) {
   const VisualIcon = visualIcons[project.visualVariant];
 
   return (
-    <div
-      className={`project-visual project-visual--${project.visualVariant}`}
-      aria-hidden="true"
-    >
-      <div className="project-visual__grid" />
-      <div className="project-visual__signal project-visual__signal--one" />
-      <div className="project-visual__signal project-visual__signal--two" />
-      <div className="project-visual__core">
-        <VisualIcon size={24} strokeWidth={1.5} />
-      </div>
-      <div className="project-visual__data project-visual__data--one">
-        {project.visualVariant === "ai" ? "VECTOR / SEARCH" : "SYSTEM / SIGNAL"}
-      </div>
-      <div className="project-visual__data project-visual__data--two">
-        {project.number} // ACTIVE FLOW
-      </div>
-      <div className="project-visual__nodes">
-        <span />
-        <span />
-        <span />
-      </div>
+    <div className={`project-visual project-visual--${project.visualVariant}`}>
+      {project.image ? (
+        <img
+          className="project-visual__image"
+          src={project.image}
+          alt={project.imageAlt}
+          loading={project.featured ? "eager" : "lazy"}
+        />
+      ) : (
+        <div className="project-visual__fallback" aria-hidden="true">
+          <div className="project-visual__grid" />
+          <div className="project-visual__signal project-visual__signal--one" />
+          <div className="project-visual__signal project-visual__signal--two" />
+          <div className="project-visual__core">
+            <VisualIcon size={24} strokeWidth={1.5} />
+          </div>
+          <div className="project-visual__data project-visual__data--one">
+            {project.visualVariant === "ai"
+              ? "VECTOR / SEARCH"
+              : "SYSTEM / SIGNAL"}
+          </div>
+          <div className="project-visual__data project-visual__data--two">
+            {project.number} // SYSTEM LAYER
+          </div>
+          <div className="project-visual__nodes">
+            <span />
+            <span />
+            <span />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -74,10 +84,10 @@ function ProjectLinks({ project }) {
   );
 }
 
-function ProjectCard({ project }) {
+function ProjectCard({ project, index }) {
   return (
     <motion.article
-      className={`project-card project-card--${project.visualVariant}`}
+      className={`project-card project-card--${project.visualVariant} ${index % 2 === 1 ? "project-card--reverse" : ""}`}
       variants={revealVariants}
     >
       <div className="project-card__visual">
@@ -90,11 +100,15 @@ function ProjectCard({ project }) {
         </div>
         <h3>{project.name}</h3>
         <p className="project-card__description">{project.shortDescription}</p>
+        <div className="project-card__signal">
+          <span className="metadata">ENGINEERING SIGNAL</span>
+          <p>{project.engineeringSignal}</p>
+        </div>
         <ul
           className="project-card__highlights"
           aria-label={`${project.name} engineering highlights`}
         >
-          {project.highlights.map((highlight) => (
+          {project.capabilities.map((highlight) => (
             <li key={highlight}>{highlight}</li>
           ))}
         </ul>
@@ -143,8 +157,8 @@ function Projects() {
       </motion.header>
 
       <motion.div className="projects-list" variants={sectionVariants}>
-        {projects.map((project) => (
-          <ProjectCard project={project} key={project.id} />
+        {projects.map((project, index) => (
+          <ProjectCard project={project} index={index} key={project.id} />
         ))}
       </motion.div>
 

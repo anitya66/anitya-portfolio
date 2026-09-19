@@ -39,6 +39,13 @@ function CredentialCard({ credential }) {
       </div>
 
       <div className="credential-card__body">
+        <span className="credential-card__eyebrow">
+          {credential.type === "leetcode"
+            ? "DSA / ALGORITHMIC THINKING"
+            : credential.type === "education"
+              ? "EDUCATION / FOUNDATION"
+              : "PROOF / SYSTEMS BUILT"}
+        </span>
         <p className="credential-card__number">{credential.number}</p>
         <h3>{credential.title}</h3>
 
@@ -74,6 +81,9 @@ function CredentialCard({ credential }) {
                 <span key={domain}>{domain}</span>
               ))}
             </div>
+            <span className="credential-card__systems-note">
+              03 DOMAINS / MARKETPLACE + AI + MICROSERVICES
+            </span>
           </>
         )}
       </div>

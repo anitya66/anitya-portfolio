@@ -1,9 +1,23 @@
-import { ArrowRight, ArrowUpRight, Download } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Code2,
+  Download,
+  Network,
+} from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { profile } from "../data/profile";
+import { socialLinks } from "../data/social";
 import profileImage from "../assets/profile.jpg";
 
 const technologies = ["JAVA", "SPRING BOOT", "REACT", "AI", "REAL-TIME"];
+const specializations = [
+  "Spring Boot backend",
+  "React applications",
+  "AI-powered systems",
+  "Real-time systems",
+];
 
 const revealVariants = {
   hidden: { opacity: 0, y: 18 },
@@ -21,11 +35,24 @@ const sequenceVariants = {
 
 function Hero() {
   const shouldReduceMotion = useReducedMotion();
+  const [specializationIndex, setSpecializationIndex] = useState(0);
+  const github = socialLinks.find((social) => social.id === "github");
+  const linkedin = socialLinks.find((social) => social.id === "linkedin");
+
+  useEffect(() => {
+    if (shouldReduceMotion) return undefined;
+
+    const interval = window.setInterval(() => {
+      setSpecializationIndex((index) => (index + 1) % specializations.length);
+    }, 3200);
+
+    return () => window.clearInterval(interval);
+  }, [shouldReduceMotion]);
 
   return (
     <motion.section
       className="hero-section"
-      id="about"
+      id="hero"
       aria-labelledby="hero-title"
       initial={shouldReduceMotion ? false : "hidden"}
       animate="visible"
@@ -36,7 +63,12 @@ function Hero() {
           className="technical-label hero-section__eyebrow"
           variants={revealVariants}
         >
-          / 01 - ENGINEERING PROFILE
+          <span className="hero-section__availability">
+            <span aria-hidden="true" /> AVAILABLE FOR OPPORTUNITIES
+          </span>
+          <span className="hero-section__identity">
+            JAVA FULL STACK DEVELOPER
+          </span>
         </motion.p>
 
         <motion.h1
@@ -44,9 +76,29 @@ function Hero() {
           id="hero-title"
           variants={revealVariants}
         >
-          <span className="hero-section__title-lead">BUILDING DIGITAL</span>
-          <span>SYSTEMS THAT MATTER.</span>
+          <span className="hero-section__title-lead">BUILDING FULL-STACK</span>
+          <span>SYSTEMS.</span>
         </motion.h1>
+
+        <motion.div
+          className="hero-section__specialization"
+          variants={revealVariants}
+          aria-live="polite"
+        >
+          <span className="metadata">CURRENTLY FOCUSED ON</span>
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={specializations[specializationIndex]}
+              className="hero-section__specialization-value"
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={shouldReduceMotion ? undefined : { opacity: 0, y: -8 }}
+              transition={{ duration: 0.28 }}
+            >
+              {specializations[specializationIndex]}
+            </motion.span>
+          </AnimatePresence>
+        </motion.div>
 
         <motion.p
           className="body-copy hero-section__description"
@@ -58,11 +110,29 @@ function Hero() {
 
         <motion.div className="hero-section__actions" variants={revealVariants}>
           <a className="hero-button hero-button--primary" href="#projects">
-            View projects
+            Explore projects
             <ArrowRight size={17} strokeWidth={1.8} aria-hidden="true" />
           </a>
+          <a
+            className="hero-button hero-button--secondary"
+            href={github.href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+            <Code2 size={16} strokeWidth={1.8} aria-hidden="true" />
+          </a>
+          <a
+            className="hero-button hero-button--secondary"
+            href={linkedin.href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn
+            <Network size={16} strokeWidth={1.8} aria-hidden="true" />
+          </a>
           <a className="hero-button hero-button--secondary" href="/resume.pdf">
-            Download resume
+            Resume
             <Download size={16} strokeWidth={1.8} aria-hidden="true" />
           </a>
         </motion.div>
@@ -108,6 +178,14 @@ function Hero() {
             <div>
               <p className="profile-panel__name">{profile.name}</p>
               <p className="metadata">{profile.role}</p>
+            </div>
+            <div className="profile-panel__floating-card profile-panel__floating-card--stack">
+              <span className="metadata">STACK</span>
+              <strong>JAVA + REACT</strong>
+            </div>
+            <div className="profile-panel__floating-card profile-panel__floating-card--focus">
+              <span className="metadata">FOCUS</span>
+              <strong>SPRING BOOT</strong>
             </div>
             <ArrowUpRight
               className="profile-panel__signal"

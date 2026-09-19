@@ -7,9 +7,19 @@ export const projects = [
     shortDescription:
       "AI-powered career intelligence platform for resume analysis, job matching, interview preparation and personalized career preparation.",
     technologies: ["Java", "Spring Boot", "Spring AI", "React", "PGVector"],
+    image: null,
+    imageAlt: "CareerMetric AI application interface",
     githubUrl: "https://github.com/anitya66/CareerMetric-AI",
     liveUrl: "https://career-metric-ai.vercel.app/",
     hasLiveDemo: true,
+    capabilities: [
+      "Resume intelligence",
+      "Resume-JD matching",
+      "AI mock interviews",
+      "RAG & vector search",
+    ],
+    engineeringSignal:
+      "AI-powered career intelligence with RAG and vector search.",
     highlights: [
       "Resume intelligence",
       "RAG & vector search",
@@ -27,9 +37,19 @@ export const projects = [
     shortDescription:
       "AI-powered freelance marketplace with project management, proposals, contracts and real-time communication.",
     technologies: ["React", "Spring Boot", "MySQL", "WebSocket", "JWT"],
+    image: null,
+    imageAlt: "ORIVEX freelance marketplace interface",
     githubUrl: "https://github.com/anitya66/orivex",
     liveUrl: "https://orivex-i1qp.vercel.app/",
     hasLiveDemo: true,
+    capabilities: [
+      "Marketplace workflows",
+      "Project management",
+      "Contracts",
+      "Audio/video calling",
+    ],
+    engineeringSignal:
+      "Full-stack marketplace with real-time communication and contracts.",
     highlights: [
       "Marketplace workflows",
       "Real-time communication",
@@ -43,13 +63,23 @@ export const projects = [
     id: "trafikking-x",
     number: "03",
     name: "TRAFIKKING X",
-    category: "AI / REAL-TIME EMERGENCY RESPONSE",
+    category: "REAL-TIME / EMERGENCY RESPONSE",
     shortDescription:
       "Real-time emergency response system connecting recommendation, assignment, dispatch, tracking and dashboard workflows.",
     technologies: ["Java", "Spring Boot", "React", "WebSocket", "MySQL"],
+    image: null,
+    imageAlt: "TRAFIKKING X emergency response interface",
     githubUrl: "https://github.com/anitya66/trafikking-x",
     liveUrl: "https://trafikking-x.vercel.app/",
     hasLiveDemo: true,
+    capabilities: [
+      "AI recommendation",
+      "Assignment engine",
+      "Dispatch engine",
+      "Live tracking",
+    ],
+    engineeringSignal:
+      "Real-time emergency workflow connecting recommendation, assignment and dispatch.",
     highlights: [
       "AI recommendation",
       "Dispatch engine",
@@ -66,9 +96,19 @@ export const projects = [
     category: "MICROSERVICES / REAL-TIME DELIVERY",
     shortDescription: "Microservices-based real-time delivery platform.",
     technologies: ["Java 21", "Spring Boot", "Kafka", "Redis", "React"],
+    image: null,
+    imageAlt: "PulseDrop real-time delivery interface",
     githubUrl: "https://github.com/anitya66/PulseDrop",
     liveUrl: null,
     hasLiveDemo: false,
+    capabilities: [
+      "Kafka event-driven architecture",
+      "Redis GEO driver assignment",
+      "Live location tracking",
+      "WebSocket updates",
+    ],
+    engineeringSignal:
+      "Event-driven delivery architecture using Kafka and Redis GEO.",
     highlights: [
       "Kafka event-driven architecture",
       "Redis GEO assignment",

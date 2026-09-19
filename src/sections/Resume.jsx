@@ -63,19 +63,25 @@ function Resume() {
           <FileText size={20} aria-hidden="true" />
         </div>
         <ul className="career-focus-panel__list">
-          {profile.focusAreas.map((area, index) => (
-            <li key={area}>
+          {profile.identityAreas.map((area, index) => (
+            <li key={area.label}>
               <span className="career-focus-panel__index">0{index + 1}</span>
-              <span>{area}</span>
+              <div>
+                <strong>{area.label}</strong>
+                <span>{area.stack}</span>
+              </div>
             </li>
           ))}
         </ul>
         <div className="career-document" aria-hidden="true">
+          <strong>ANITYA ANAND</strong>
+          <span>JAVA FULL STACK DEVELOPER</span>
           <div className="career-document__bar" />
           <div className="career-document__line career-document__line--long" />
           <div className="career-document__line" />
           <div className="career-document__line career-document__line--short" />
-          <span>AN / PROFILE</span>
+          <small>JAVA / SPRING BOOT / REACT</small>
+          <small>AI / REAL-TIME SYSTEMS</small>
         </div>
       </motion.aside>
     </motion.section>

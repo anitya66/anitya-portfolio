@@ -9,4 +9,10 @@ export const profile = {
     "AI-powered applications",
     "Real-time systems",
   ],
+  identityAreas: [
+    { label: "Backend engineering", stack: "Java / Spring Boot" },
+    { label: "Full-stack development", stack: "React / modern frontend" },
+    { label: "AI applications", stack: "Spring AI / RAG / vector search" },
+    { label: "Real-time systems", stack: "WebSocket / event-driven systems" },
+  ],
 };

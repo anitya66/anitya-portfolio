@@ -1,6 +1,6 @@
 import { Cpu, Database, LayoutPanelTop, Server, Wrench } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
-import { skills } from "../data/skills";
+import { architectureFlow, skills } from "../data/skills";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 18 },
@@ -50,7 +50,7 @@ function TechnologyStack() {
       </motion.header>
 
       <motion.div className="stack-grid" variants={sectionVariants}>
-        {skills.slice(0, 4).map((group, index) => {
+        {skills.slice(0, 4).map((group) => {
           const Icon = categoryIcons[group.icon];
 
           return (
@@ -63,7 +63,7 @@ function TechnologyStack() {
                 <span className="stack-card__icon">
                   <Icon size={18} aria-hidden="true" />
                 </span>
-                <span className="metadata">0{index + 1} / SYSTEM LAYER</span>
+                <span className="metadata">{group.index} / SYSTEM LAYER</span>
               </div>
               <h3>{group.category}</h3>
               <ul className="stack-card__items">
@@ -82,6 +82,37 @@ function TechnologyStack() {
         })}
       </motion.div>
 
+      <motion.div className="stack-architecture" variants={cardVariants}>
+        <div className="stack-architecture__header">
+          <div>
+            <span className="technical-label">SYSTEM RELATIONSHIPS</span>
+            <h3>Layers that work together</h3>
+          </div>
+          <span className="metadata">ABSTRACTION / 01</span>
+        </div>
+        <div
+          className="stack-architecture__flow"
+          aria-label="Technology layer relationships"
+        >
+          {architectureFlow.map((layer, index) => (
+            <div className="stack-architecture__step" key={layer.label}>
+              <div className="stack-architecture__node">
+                <span>{layer.label}</span>
+                <strong>{layer.detail}</strong>
+              </div>
+              {index < architectureFlow.length - 1 && (
+                <span
+                  className="stack-architecture__connector"
+                  aria-hidden="true"
+                >
+                  ↓
+                </span>
+              )}
+            </div>
+          ))}
+        </div>
+      </motion.div>
+
       {skills.slice(4).map((group) => {
         const Icon = categoryIcons[group.icon];
 
@@ -94,7 +125,7 @@ function TechnologyStack() {
             <div className="stack-principles__header">
               <div>
                 <span className="technical-label">
-                  05 / ENGINEERING FOUNDATIONS
+                  {group.index} / ENGINEERING FOUNDATIONS
                 </span>
                 <h3>{group.category}</h3>
               </div>

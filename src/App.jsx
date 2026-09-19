@@ -1,8 +1,10 @@
 import MainLayout from "./layout/MainLayout";
 import Hero from "./sections/Hero";
+import About from "./sections/About";
 import DeveloperActivity from "./sections/DeveloperActivity";
 import TechnologyStack from "./sections/TechnologyStack";
 import Projects from "./sections/Projects";
+import EngineeringPrinciples from "./sections/EngineeringPrinciples";
 import Achievements from "./sections/Achievements";
 import Resume from "./sections/Resume";
 import Contact from "./sections/Contact";
@@ -14,9 +16,11 @@ function App() {
   return (
     <MainLayout>
       <Hero />
+      <About />
       <DeveloperActivity />
       <TechnologyStack />
       <Projects />
+      <EngineeringPrinciples />
       <Achievements />
       <Resume />
       <Contact />

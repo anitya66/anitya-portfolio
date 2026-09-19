@@ -4,6 +4,7 @@ import {
   ExternalLink,
   GitBranch,
   Layers3,
+  Network,
 } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
@@ -23,6 +24,37 @@ const sectionVariants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.08 } },
 };
+
+const verifiedStats = [
+  {
+    id: "leetcode",
+    value: "250+",
+    label: "DSA PROBLEMS",
+    supporting: "Problems solved on LeetCode",
+    tone: "cyan",
+  },
+  {
+    id: "systems",
+    value: "03+",
+    label: "PRODUCTION-GRADE SYSTEMS",
+    supporting: "Full-stack systems independently designed and built.",
+    tone: "green",
+  },
+  {
+    id: "stack",
+    value: "JAVA / SPRING BOOT / REACT",
+    label: "CORE STACK",
+    supporting: "Primary full-stack engineering focus",
+    tone: "blue",
+  },
+  {
+    id: "domains",
+    value: "AI / REAL-TIME SYSTEMS",
+    label: "ENGINEERING DOMAINS",
+    supporting: "AI-powered and real-time application development",
+    tone: "violet",
+  },
+];
 
 function formatUpdatedDate(date) {
   if (!date) return "RECENTLY UPDATED";
@@ -138,25 +170,60 @@ function DeveloperActivity() {
           className="body-copy activity-section__intro"
           variants={cardVariants}
         >
-          A live view of public repositories, problem solving and the
-          engineering domains shaping my work.
+          Public engineering activity, problem solving and the systems shaping
+          my work.
         </motion.p>
       </div>
 
-      <motion.div className="activity-overview" variants={sectionVariants}>
+      <motion.div className="activity-stat-grid" variants={sectionVariants}>
+        {verifiedStats.map((stat, index) => (
+          <motion.article
+            className={`activity-stat activity-stat--${stat.tone}`}
+            variants={cardVariants}
+            key={stat.id}
+          >
+            <span className="activity-stat__index">
+              0{index + 1} / VERIFIED
+            </span>
+            <span className="metadata">{stat.label}</span>
+            <p
+              className={`activity-stat__value activity-stat__value--${stat.id}`}
+            >
+              {stat.value}
+            </p>
+            <p className="activity-stat__supporting">{stat.supporting}</p>
+          </motion.article>
+        ))}
+      </motion.div>
+
+      <motion.div className="activity-profile-grid" variants={sectionVariants}>
         <motion.article
-          className="activity-card activity-card--github"
+          className="activity-profile-card activity-profile-card--github"
           variants={cardVariants}
         >
-          <div className="activity-card__topline">
+          <div className="activity-profile-card__header">
             <span className="activity-card__icon">
               <GitBranch size={19} aria-hidden="true" />
             </span>
             <span className="metadata">PUBLIC PROFILE</span>
           </div>
+          <div
+            className="activity-profile-card__visual activity-profile-card__visual--github"
+            aria-hidden="true"
+          >
+            <span className="activity-profile-card__node activity-profile-card__node--one" />
+            <span className="activity-profile-card__node activity-profile-card__node--two" />
+            <span className="activity-profile-card__node activity-profile-card__node--three" />
+            <span className="activity-profile-card__connection activity-profile-card__connection--one" />
+            <span className="activity-profile-card__connection activity-profile-card__connection--two" />
+          </div>
           <h3>GitHub</h3>
-          <p className="activity-card__value">
+          <p className="activity-profile-card__username">
             @{githubData.profile?.login ?? developerProfile.github.username}
+          </p>
+          <p className="activity-profile-card__description">
+            Public repositories and engineering work available through the
+            source profile.
           </p>
           <a
             className="activity-card__link"
@@ -164,54 +231,74 @@ function DeveloperActivity() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Open profile <ExternalLink size={14} aria-hidden="true" />
+            View GitHub profile <ExternalLink size={14} aria-hidden="true" />
           </a>
         </motion.article>
 
         <motion.article
-          className="activity-card activity-card--leetcode"
+          className="activity-profile-card activity-profile-card--leetcode"
           variants={cardVariants}
         >
-          <div className="activity-card__topline">
+          <div className="activity-profile-card__header">
             <span className="activity-card__icon">
               <Code2 size={19} aria-hidden="true" />
             </span>
             <span className="metadata">VERIFIED SIGNAL</span>
           </div>
+          <div
+            className="activity-profile-card__visual activity-profile-card__visual--leetcode"
+            aria-hidden="true"
+          >
+            <span>[</span>
+            <span>_</span>
+            <span>]</span>
+            <i />
+            <i />
+            <i />
+          </div>
           <h3>LeetCode</h3>
-          <p className="activity-card__metric">
+          <p className="activity-profile-card__username">
+            @{developerProfile.leetcode.username}
+          </p>
+          <p className="activity-profile-card__metric">
             {developerProfile.leetcode.solved}
           </p>
-          <p className="activity-card__metric-label">Problems solved</p>
+          <p className="activity-profile-card__metric-label">Problems solved</p>
           <a
             className="activity-card__link"
             href={developerProfile.leetcode.url}
             target="_blank"
             rel="noopener noreferrer"
           >
-            Data structures &amp; algorithms{" "}
-            <ExternalLink size={14} aria-hidden="true" />
+            View LeetCode <ExternalLink size={14} aria-hidden="true" />
           </a>
         </motion.article>
-
-        <motion.article
-          className="activity-card activity-card--focus"
-          variants={cardVariants}
-        >
-          <div className="activity-card__topline">
-            <span className="activity-card__icon">
-              <Layers3 size={19} aria-hidden="true" />
-            </span>
-            <span className="metadata">ENGINEERING FOCUS</span>
-          </div>
-          <h3>Systems I build with</h3>
-          <ul className="activity-focus-list">
-            {developerProfile.engineeringFocus.map((focus) => (
-              <li key={focus}>{focus}</li>
-            ))}
-          </ul>
-        </motion.article>
       </motion.div>
+
+      <motion.article className="activity-focus-card" variants={cardVariants}>
+        <div className="activity-focus-card__header">
+          <div className="activity-focus-card__title">
+            <Layers3 size={19} aria-hidden="true" />
+            <div>
+              <span className="metadata">ENGINEERING FOCUS</span>
+              <h3>Systems I build with</h3>
+            </div>
+          </div>
+          <Network size={20} aria-hidden="true" />
+        </div>
+        <div className="activity-focus-card__groups">
+          {developerProfile.engineeringFocusGroups.map((group) => (
+            <div className="activity-focus-group" key={group.label}>
+              <span className="activity-focus-group__label">{group.label}</span>
+              <div className="activity-focus-group__items">
+                {group.items.map((item) => (
+                  <span key={item}>{item}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </motion.article>
 
       <motion.article className="activity-signal" variants={cardVariants}>
         <div className="activity-signal__heading">

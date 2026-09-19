@@ -4,6 +4,7 @@ import {
   Brackets,
   Code2,
   ExternalLink,
+  FileText,
   Mail,
   MessageCircle,
   Network,
@@ -12,9 +13,11 @@ import { motion, useReducedMotion } from "framer-motion";
 import { contactDetails, socialLinks } from "../../data/social";
 
 const footerNavigation = [
+  { label: "About", href: "#about" },
   { label: "Activity", href: "#activity" },
   { label: "Stack", href: "#stack" },
   { label: "Projects", href: "#projects" },
+  { label: "Engineering", href: "#engineering" },
   { label: "Achievements", href: "#achievements" },
   { label: "Career", href: "#career" },
   { label: "Contact", href: "#contact" },
@@ -26,6 +29,60 @@ const socialIcons = {
   brackets: Brackets,
   book: BookOpen,
 };
+
+function FloatingSocialDock() {
+  const dockLinks = [
+    ...socialLinks,
+    {
+      id: "email",
+      label: "Email",
+      href: contactDetails.emailHref,
+      icon: "email",
+    },
+    {
+      id: "whatsapp",
+      label: "WhatsApp",
+      href: contactDetails.whatsappHref,
+      icon: "whatsapp",
+      external: true,
+    },
+    { id: "resume", label: "Resume", href: "/resume.pdf", icon: "resume" },
+  ];
+  const dockIcons = {
+    ...socialIcons,
+    email: Mail,
+    whatsapp: MessageCircle,
+    resume: FileText,
+  };
+
+  return (
+    <motion.nav
+      className="social-dock"
+      aria-label="Professional links"
+      initial={{ opacity: 0, x: 12 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.45, delay: 0.3, ease: "easeOut" }}
+    >
+      {dockLinks.map((link) => {
+        const Icon = dockIcons[link.icon];
+
+        return (
+          <a
+            className="social-dock__link"
+            href={link.href}
+            target={link.external ? "_blank" : undefined}
+            rel={link.external ? "noopener noreferrer" : undefined}
+            aria-label={link.label}
+            data-tooltip={link.label}
+            key={link.id}
+          >
+            <Icon size={17} aria-hidden="true" />
+          </a>
+        );
+      })}
+    </motion.nav>
+  );
+}
 
 function Footer() {
   const shouldReduceMotion = useReducedMotion();
@@ -54,8 +111,7 @@ function Footer() {
           </a>
           <p className="premium-footer__role">Java Full Stack Developer</p>
           <p className="premium-footer__summary">
-            Building scalable full-stack systems with Java, Spring Boot and
-            React.
+            Building modern full-stack systems with Java, Spring Boot and React.
           </p>
         </div>
 
@@ -123,9 +179,14 @@ function Footer() {
       </div>
 
       <div className="container premium-footer__bottom">
+        <div className="premium-footer__metadata">
+          <span>JAVA FULL STACK DEVELOPER</span>
+          <span aria-hidden="true">/</span>
+          <span>REACT + SPRING BOOT</span>
+        </div>
         <span>© {currentYear} Anitya Anand</span>
-        <span>Java Full Stack Developer</span>
       </div>
+      <FloatingSocialDock />
     </motion.footer>
   );
 }

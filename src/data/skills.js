@@ -1,6 +1,7 @@
 export const skills = [
   {
     id: "backend",
+    index: "01",
     category: "BACKEND & FRAMEWORKS",
     icon: "server",
     items: [
@@ -21,6 +22,7 @@ export const skills = [
   },
   {
     id: "frontend",
+    index: "02",
     category: "FRONTEND",
     icon: "layout",
     items: [
@@ -36,6 +38,7 @@ export const skills = [
   },
   {
     id: "data",
+    index: "03",
     category: "DATA & STORAGE",
     icon: "database",
     items: [
@@ -48,6 +51,7 @@ export const skills = [
   },
   {
     id: "tools",
+    index: "04",
     category: "TOOLS & DELIVERY",
     icon: "wrench",
     items: [
@@ -61,6 +65,7 @@ export const skills = [
   },
   {
     id: "engineering",
+    index: "05",
     category: "ENGINEERING FOUNDATIONS",
     icon: "cpu",
     conceptual: true,
@@ -89,4 +94,12 @@ export const skills = [
       { name: "SOLID Principles", context: "Object design", featured: true },
     ],
   },
+];
+
+export const architectureFlow = [
+  { label: "FRONTEND", detail: "React / Vite" },
+  { label: "API + REAL-TIME", detail: "REST / WebSocket" },
+  { label: "BACKEND", detail: "Spring Boot" },
+  { label: "DATA ACCESS", detail: "JPA / Hibernate" },
+  { label: "DATA", detail: "MySQL / PostgreSQL" },
 ];
