@@ -57,4 +57,4 @@ The portfolio uses anchor navigation and does not require SPA rewrite configurat
 Anitya Anand
 
 - GitHub: https://github.com/anitya66
-- LinkedIn: https://www.linkedin.com/in/anitya-anand/
+- LinkedIn: https://www.linkedin.com/in/anityaanand/
