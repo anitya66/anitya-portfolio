@@ -15,7 +15,7 @@ export const socialLinks = [
   {
     id: "linkedin",
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/anitya-anand/",
+    href: "https://www.linkedin.com/in/anitya-anand",
     icon: "network",
   },
   {
